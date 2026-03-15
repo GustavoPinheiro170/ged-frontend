@@ -1,0 +1,41 @@
+<header class="header">
+
+  <div class="left">
+
+    <div class="logo">
+        <h3>GED - Gestão de Documentos</h3>
+    </div>
+
+    <div class="menu">
+
+      <button
+        class="nav-btn"
+        routerLink="/dashboard"
+        routerLinkActive="active">
+        Dashboard
+      </button>
+
+      <button
+        class="nav-btn primary"
+        [disabled]="noHasPermission"
+        routerLink="/dashboard/new-document">
+        + Novo Documento
+      </button>
+
+    </div>
+
+  </div>
+
+  <div class="right">
+
+    <span class="username">
+      {{ getUser() }}
+    </span>
+
+    <button class="logout-btn" (click)="logout()">
+      Logout
+    </button>
+
+  </div>
+
+</header>
