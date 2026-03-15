@@ -1,0 +1,97 @@
+<div class="document-container">
+  <div class="card">
+    <h2>Novo Documento</h2>
+    <p class="subtitle">Cadastro de metadados do documento</p>
+
+    <form [formGroup]="documentForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label>Título *</label>
+        <input
+          type="text"
+          formControlName="title"
+          placeholder="Digite o título do documento"
+        />
+
+        <div
+          class="error"
+          *ngIf="
+            documentForm.get('title')?.invalid &&
+            documentForm.get('title')?.touched
+          "
+        >
+          Título é obrigatório
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Descrição</label>
+        <textarea
+          formControlName="description"
+          placeholder="Descrição do documento"
+        ></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Tags</label>
+
+        <div class="tags-container">
+          <!-- tags criadas -->
+          <span class="tag" *ngFor="let tag of tags; let i = index">
+            {{ tag }}
+            <button type="button" (click)="removeTag(i)">✕</button>
+          </span>
+
+          <!-- input -->
+          <input
+            type="text"
+            placeholder="Digite uma tag e pressione ,"
+            (keydown)="addTag($event)"
+          />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Owner / Tenant</label>
+        <input
+          type="text"
+          formControlName="owner"
+          placeholder="Responsável pelo documento"
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Status</label>
+
+        <select formControlName="status">
+          <option value="DRAFT">Draft</option>
+          <option value="PUBLISHED">Published</option>
+          <option value="ARCHIVED">Archived</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Upload do Arquivo</label>
+
+        <input
+          type="file"
+          (change)="onFileSelected($event)"
+          accept=".pdf,.png,.jpg"
+        />
+      </div>
+
+      <div class="actions">
+        <button type="submit" [disabled]="documentForm.invalid">
+          Salvar Documento
+        </button>
+
+        <button
+          type="button"
+          routerLink="/dashboard/documents"
+          class="secondary"
+        >
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

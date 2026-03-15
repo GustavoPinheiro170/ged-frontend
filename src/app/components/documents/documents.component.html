@@ -1,0 +1,59 @@
+<h2>Dashboard</h2>
+
+<div class="filters">
+  <div class="search">
+    <input
+      type="text"
+      placeholder="Buscar por título"
+      [(ngModel)]="searchTitle"
+      (keyup.enter)="loadDocuments()"
+    />
+
+    <select [(ngModel)]="statusFilter">
+      <option value="">Todos</option>
+      <option value="DRAFT">Rascunho</option>
+      <option value="PUBLISHED">Publicado</option>
+      <option value="ARCHIVED">Arquivado</option>
+    </select>
+
+    <button class="btn-search" (click)="loadDocuments()">Buscar</button>
+  </div>
+</div>
+
+<table class="documents-table">
+  <thead>
+    <tr>
+      <th>Título</th>
+      <th>Status</th>
+      <th>Owner</th>
+      <th>Criado em</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let doc of documents">
+      <td>{{ doc.title }}</td>
+      <td>
+        <span class="status" [ngClass]="doc.status.toLowerCase()">
+          {{ doc.status }}
+        </span>
+      </td>
+
+      <td>{{ doc.owner }}</td>
+      <td>{{ doc.createdAt | date: "short" }}</td>
+
+      <td>
+        <button (click)="openDocument(doc.id)">Detalhes</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="pagination">
+  <button (click)="previousPage()" [disabled]="page === 0">Anterior</button>
+
+  <span>Página {{ page + 1 }}</span>
+
+  <button (click)="nextPage()">Próxima</button>
+</div>

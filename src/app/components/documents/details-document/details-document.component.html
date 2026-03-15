@@ -1,0 +1,101 @@
+<div class="document-container">
+  <div class="card">
+    <div class="header">
+      <h2>Detalhes do Documento</h2>
+      <button *ngIf="hasPermission && !isEdit "
+        class="edit-btn"
+        type="button"
+        (click)="enableEdit()"
+      >
+        Editar
+      </button>
+    </div>
+
+    <p class="subtitle">Informações e metadados do documento</p>
+
+    <form [formGroup]="documentForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label>Título</label>
+        <input type="text" formControlName="title" [readonly]="!isEdit" />
+      </div>
+
+      <div class="form-group">
+        <label>Descrição</label>
+        <textarea formControlName="description" [readonly]="!isEdit"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Tags</label>
+
+        <div class="tags-container">
+          <span class="tag" *ngFor="let tag of tags; let i = index">
+            {{ tag }}
+
+            <button *ngIf="isEdit" type="button" (click)="removeTag(i)">
+              ✕
+            </button>
+          </span>
+
+          <input
+            *ngIf="isEdit"
+            type="text"
+            placeholder="Digite uma tag e pressione ,"
+            (keydown)="addTag($event)"
+          />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Owner / Tenant</label>
+        <input type="text" formControlName="owner" [readonly]="!isEdit" />
+      </div>
+
+      <div class="form-group">
+        <label>Status</label>
+
+        <select formControlName="status" [disabled]="!isEdit">
+          <option [disabled]="!isEdit" value="DRAFT">Draft</option>
+          <option [disabled]="!isEdit" value="PUBLISHED">Published</option>
+          <option [disabled]="!isEdit" value="ARCHIVED">Archived</option>
+        </select>
+      </div>
+
+      <div class="viewer" *ngIf="!isEdit">
+        <!-- PDF -->
+        <iframe
+          *ngIf="fileType === 'pdf'"
+          [src]="fileUrl"
+          width="100%"
+          height="900px"
+        >
+        </iframe>
+
+        <!-- Imagem -->
+        <img
+          *ngIf="fileType === 'image'"
+          [src]="fileUrl"
+          style="max-width: 100%; height: auto"
+        />
+      </div>
+      <div class="form-group" *ngIf="isEdit">
+        <label>Substituir Arquivo</label>
+
+        <input
+          type="file"
+          (change)="onFileSelected($event)"
+          accept=".pdf,.png,.jpg"
+        />
+      </div>
+
+      <div class="actions" *ngIf="isEdit">
+        <button type="submit" [disabled]="documentForm.invalid">
+          Salvar Alterações
+        </button>
+
+        <button type="button" class="secondary" (click)="cancelEdit()">
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

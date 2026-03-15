@@ -1,0 +1,100 @@
+.dashboard-container {
+  padding: 40px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+h2 {
+  margin-bottom: 20px;
+}
+
+.filters {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.filters input,
+.filters select {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.filters button {
+  background: #4e73df;
+  border: none;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.filters button:hover {
+  background: #2e59d9;
+}
+
+.documents-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+select {
+  margin-left: 10px;
+}
+
+.documents-table th {
+  text-align: left;
+  background: #f5f5f5;
+  padding: 12px;
+}
+
+.documents-table td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+}
+
+.documents-table tr:hover {
+  background: #fafafa;
+}
+
+button {
+  padding: 6px 10px;
+  border: none;
+  background: #36b9cc;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #2c9faf;
+}
+
+.btn-search {
+  padding-left: 10px;
+  margin-left: 10px;
+}
+.status {
+  padding: 4px 8px;
+  border-radius: 4px;
+  color: white;
+  font-size: 12px;
+}
+
+.status.draft {
+  background: orange;
+}
+
+.status.published {
+  background: green;
+}
+
+.status.archived {
+  background: gray;
+}
+
+.pagination {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
